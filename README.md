@@ -1,8 +1,26 @@
-# PiutangGuard
+# Sistem Informasi Akuntansi Pengelolaan Piutang Usaha — PiutangGuard
 
-PiutangGuard adalah aplikasi web internal untuk mengelola piutang usaha dan mencatat dampaknya ke jurnal. Aplikasi menyediakan data pelanggan, invoice, pembayaran, analisis umur piutang (aging), estimasi cadangan kerugian kredit (ECL), jurnal, serta laporan laba rugi dan posisi keuangan.
+PiutangGuard adalah aplikasi web akademik untuk membantu pencatatan dan pemantauan piutang usaha. Sistem ini mengelola data pelanggan, invoice, dan pembayaran; menyajikan analisis umur piutang (aging) serta estimasi cadangan kerugian kredit (ECL); dan menyediakan jurnal otomatis, laporan laba rugi, serta laporan posisi keuangan.
 
-Frontend berupa HTML, CSS, dan JavaScript tanpa proses build. Autentikasi dan penyimpanan data menggunakan Supabase Auth dan PostgreSQL. Aturan transaksi, perhitungan, jurnal otomatis, serta Row Level Security (RLS) didefinisikan di [backend/schema.sql](./backend/schema.sql).
+Aplikasi dibuat dengan HTML, CSS, dan JavaScript, dengan Supabase Auth dan PostgreSQL untuk autentikasi serta penyimpanan data. Aturan transaksi, perhitungan, jurnal otomatis, dan kebijakan keamanan Row Level Security (RLS) didefinisikan di [backend/schema.sql](./backend/schema.sql).
+
+> PiutangGuard merupakan prototipe akademik untuk simulasi pengelolaan piutang, bukan klaim sebagai sistem ERP atau aplikasi akuntansi produksi yang lengkap.
+
+## Demo Aplikasi
+
+[Buka demo PiutangGuard di GitHub Pages](https://yohanaharianjaa-alt.github.io/Piutang-Guard/)
+
+Ketersediaan demo bergantung pada publikasi GitHub Pages dan konfigurasi Supabase yang aktif. Jangan memasukkan data rahasia atau data perusahaan nyata melalui demo.
+
+## Identitas Tugas
+
+| Keterangan | Identitas |
+|---|---|
+| Nama | Yohana Harianja |
+| NIM | 12030124140228 |
+| Mata Kuliah | Pemrograman / Coding |
+| Kelas | D |
+| Dosen Pengampu | Totok Dewayanto |
 
 ## Fitur
 
