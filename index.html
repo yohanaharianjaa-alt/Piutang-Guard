@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10263f">
+  <title>PiutangGuard | Pengelolaan Piutang</title>
+  <link rel="stylesheet" href="style.css?v=20261102">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../backend/app.js" defer></script>
+  <script src="script.js?v=20261102b" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar" aria-label="Navigasi utama">
+      <a class="brand" href="#dashboard" aria-label="PiutangGuard beranda">
+        <span class="brand-mark"><i class="fa-solid fa-shield-halved"></i></span>
+        <span><strong>PiutangGuard</strong><small>Receivables control</small></span>
+      </a>
+      <div class="workspace-label">WORKSPACE</div>
+      <nav class="navigation">
+        <a href="#dashboard" data-page="dashboard"><i class="fa-solid fa-chart-pie"></i><span>Dashboard</span></a>
+        <a href="#customers" data-page="customers"><i class="fa-solid fa-users"></i><span>Pelanggan</span></a>
+        <a href="#invoices" data-page="invoices"><i class="fa-solid fa-file-invoice-dollar"></i><span>Invoice</span></a>
+        <a href="#payments" data-page="payments"><i class="fa-solid fa-money-bill-transfer"></i><span>Pembayaran</span></a>
+        <a href="#aging" data-page="aging"><i class="fa-regular fa-calendar"></i><span>Aging Piutang</span></a>
+        <a href="#allowance" data-page="allowance"><i class="fa-solid fa-scale-balanced"></i><span>Cadangan ECL</span></a>
+        <a href="#journals" data-page="journals"><i class="fa-solid fa-book-open"></i><span>Jurnal</span></a>
+        <div class="navigation-group">
+          <div class="navigation-group-title"><i class="fa-solid fa-chart-column"></i><span>Laporan Keuangan</span></div>
+          <a href="#income" data-page="income"><i class="fa-solid fa-chart-line"></i><span>Laporan Laba Rugi</span></a>
+          <a href="#position" data-page="position"><i class="fa-solid fa-landmark"></i><span>Posisi Keuangan</span></a>
+        </div>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="security-note"><i class="fa-solid fa-lock"></i><span>Data dilindungi oleh Supabase Row Level Security.</span></div>
+        <button class="sidebar-user" id="sidebar-user" type="button" aria-label="Keluar" title="Keluar dari akun">
+          <span class="avatar" id="user-avatar">PG</span>
+          <span class="user-copy"><strong id="user-name">Belum masuk</strong><small id="user-email">Sesi Supabase</small></span>
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        </button>
+      </div>
+    </aside>
+    <button class="sidebar-backdrop" id="sidebar-backdrop" aria-label="Tutup navigasi" tabindex="-1"></button>
+    <main class="main-area">
+      <header class="topbar">
+        <button class="icon-button mobile-menu" id="mobile-menu" type="button" aria-label="Buka navigasi" aria-expanded="false">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <div class="breadcrumb"><span>PiutangGuard</span><i class="fa-solid fa-chevron-right"></i><strong id="page-title">Dashboard</strong></div>
+        <div class="topbar-actions">
+          <span class="connection-status" id="connection-status"><span class="status-dot"></span><span id="connection-label">Memeriksa koneksi</span></span>
+          <button class="icon-button" id="refresh-button" type="button" title="Muat ulang data" aria-label="Muat ulang data"><i class="fa-solid fa-rotate"></i></button>
+        </div>
+      </header>
+      <section class="page-container">
+        <div id="notice-region" aria-live="polite"></div>
+        <div id="page-content" aria-live="polite"></div>
+      </section>
+    </main>
+  </div>
+
+  <dialog class="dialog" id="auth-dialog">
+    <form class="dialog-card auth-card" id="auth-form">
+      <div class="auth-brand"><span class="brand-mark"><i class="fa-solid fa-shield-halved"></i></span><span>PiutangGuard</span></div>
+      <p class="eyebrow">RUANG KERJA KEUANGAN</p>
+      <h1>Masuk ke akun Anda</h1>
+      <p class="muted">Gunakan akun Supabase yang memiliki akses ke workspace ini.</p>
+      <label>Email<input name="email" type="email" autocomplete="username" required placeholder="nama@perusahaan.co.id"></label>
+      <label>Kata sandi<input name="password" type="password" autocomplete="current-password" required placeholder="Masukkan kata sandi"></label>
+      <button class="button button-primary full-width" type="submit"><i class="fa-solid fa-arrow-right-to-bracket"></i> Masuk</button>
+      <div class="form-message" id="auth-message" role="status"></div>
+      <small class="auth-footnote">Akun dibuat oleh admin Supabase untuk penggunaan internal. Hak akses data mengikuti kebijakan RLS.</small>
+    </form>
+  </dialog>
+
+  <dialog class="dialog" id="editor-dialog">
+    <form class="dialog-card" id="editor-form" method="dialog">
+      <div class="dialog-heading"><div><p class="eyebrow" id="editor-eyebrow">DATA</p><h2 id="editor-title">Tambah data</h2></div><button class="icon-button dialog-close" type="button" data-close-dialog aria-label="Tutup"><i class="fa-solid fa-xmark"></i></button></div>
+      <div class="form-grid" id="editor-fields"></div>
+      <div class="form-message" id="editor-message" role="status"></div>
+      <div class="dialog-actions"><button class="button button-secondary" type="button" data-close-dialog>Batal</button><button class="button button-primary" id="editor-submit" type="submit">Simpan</button></div>
+    </form>
+  </dialog>
+
+  <dialog class="dialog" id="detail-dialog">
+    <div class="dialog-card">
+      <div class="dialog-heading"><div><p class="eyebrow" id="detail-eyebrow">RINCIAN</p><h2 id="detail-title">Detail transaksi</h2></div><button class="icon-button dialog-close" type="button" data-close-dialog aria-label="Tutup"><i class="fa-solid fa-xmark"></i></button></div>
+      <div id="detail-content"></div>
+      <div class="dialog-actions"><button class="button button-secondary" type="button" data-close-dialog>Tutup</button></div>
+    </div>
+  </dialog>
+</body>
+</html>
