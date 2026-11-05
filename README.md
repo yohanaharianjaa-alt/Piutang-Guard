@@ -1,6 +1,6 @@
 # Sistem Informasi Akuntansi Pengelolaan Piutang Usaha — PiutangGuard
 
-PiutangGuard adalah aplikasi web akademik untuk membantu pencatatan dan pemantauan piutang usaha. Sistem ini mengelola data pelanggan, invoice, dan pembayaran; menyajikan analisis umur piutang (aging) serta estimasi cadangan kerugian kredit (ECL); dan menyediakan jurnal otomatis, laporan laba rugi, serta laporan posisi keuangan.
+PiutangGuard adalah aplikasi berbasis web untuk membantu pencatatan dan pemantauan piutang usaha. Sistem ini mengelola data pelanggan, invoice, dan pembayaran; menyajikan analisis umur piutang (aging) serta estimasi cadangan kerugian kredit (ECL); dan menyediakan jurnal otomatis, laporan laba rugi, serta laporan posisi keuangan.
 
 Aplikasi dibuat dengan HTML, CSS, dan JavaScript, dengan Supabase Auth dan PostgreSQL untuk autentikasi serta penyimpanan data. Aturan transaksi, perhitungan, jurnal otomatis, dan kebijakan keamanan Row Level Security (RLS) didefinisikan di [backend/schema.sql](./backend/schema.sql).
 
