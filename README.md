@@ -15,7 +15,7 @@ pelanggan, invoice, pembayaran, aging piutang, cadangan kerugian kredit
 
 ## Link Demo
 
-- **Demo web:**
+- Demo web: https://yohanaharianjaa-alt.github.io/Piutang-Guard/
 - Aplikasi akan otomatis membuka halaman [frontend/index.html](frontend/index.html)
   melalui file [index.html](index.html) di folder akar.
 
